@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import FrontPage from "./components/frontpage";
+import ChatBot from "./components/chatbot";
+import { Routes,Route} from 'react-router-dom';
+import Client from './components/client';
+import SignIn from './components/signin';
+import Icons from "./components/helper";
 
 function App() {
+  
+  Icons();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     
+
+<Routes>
+
+
+<Route exact path='/' element={<FrontPage/>}  />
+<Route  exact path='/chatbot' element={<ChatBot/>}/>
+<Route exact path='/client' element={<Client/>} ></Route>
+<Route exact path='/signin' element={<SignIn/>} ></Route>
+
+</Routes>
+
+
+
+  
+
+  
     </div>
   );
 }

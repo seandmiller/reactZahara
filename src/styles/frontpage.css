@@ -1,0 +1,152 @@
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  
+ 
+.frontpage-title {
+    display: flex;
+    text-align: center;
+    flex-flow: column ;
+    align-items: center;
+
+   
+}
+.frontpage-title h1 {
+    font-weight: 900;
+    font-family: Apple Chancery, cursive;
+    font-size: 2.2em;
+    
+}
+
+
+  .frontpage-title p {
+    
+    overflow: hidden; 
+    border-right: .15em solid lightblue; 
+   white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .15em; 
+    width: fit-content;
+   
+  }
+
+.frontpage-title .t1 {
+    display: inline-block;
+}
+
+.frontpage-title .t2 {
+    display: inline-block;
+}
+.frontpage-title .t3 {
+    display: inline-block;
+}
+
+
+
+.frontpage-title .type1 {
+    width: 0%;
+    animation: 
+    typing 5s steps(40, end) forwards;
+  
+
+}
+
+.frontpage-title .type2 {
+    width: 0%;
+    
+    animation: 
+    typing 5s  steps(50,end) forwards;
+    
+    animation-delay: 6s;
+}
+
+.frontpage-title .type3 {
+    width: 0%;
+    animation: 
+    typing 5s steps(40, end) forwards;
+   
+    animation-delay: 12s;
+}
+
+
+  .register-text {
+    font-size: x-large;
+    font-weight: 100;
+    
+  }
+
+
+.register-wrapper {
+    margin: auto;
+    width: 100%;
+    height: 100vh;
+    
+}
+.register-wrapper label {
+    display: flex;
+    justify-content: center;
+  
+}
+.register-wrapper form {
+    margin:auto;
+    width: 27%;
+    padding:10px;
+    display: flex;
+    flex-flow: column wrap;
+    height: 50%;
+    background-color: rgb(2, 112, 247);
+    padding:5px;
+    border-radius: 10px;
+    color: whitesmoke;
+    box-shadow: 0px 2px 20px rgb(37, 135, 255) ;
+    opacity: 70%;
+}
+.register-wrapper input {
+    margin: auto;
+    height: 15px;
+    width: 75%;
+    border:0px;
+}
+.valid {
+    display: block;
+    color: lightgreen;
+    
+}
+
+#pwdnote {
+    font-size: 12px;
+    background-color: lightcoral;
+    color : white;
+    border-radius: 20px;
+    padding: 2px;
+    margin:0;
+}
+.hide {
+    display: none;
+}
+
+.invalid {
+    display: block;
+    color:red;
+}
+
+.offscreen {
+    display: none;
+    
+}
+
+.register-wrapper button {
+ width: 50%;
+}
+
+.register-text {
+    font-weight: 200;
+    font-size: x-large;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+
+
+
