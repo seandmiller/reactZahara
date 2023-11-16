@@ -150,8 +150,12 @@
 
 @media (max-device-width: 600px) {
     .frontpage-title div {
-        font-size: 0.2em;
+        font-size: 0.4em;
+        font-weight: 500;
     }
+   /* html > body > #root >  .App > .frontpage-container > div {
+        overflow: hidden;
+    } */
 
     .register-wrapper form {
         margin:auto;
