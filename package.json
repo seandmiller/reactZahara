@@ -24,8 +24,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "webpack-dev-server --config webpack/dev.config.js --watch",
-    "build": "cross-env NODE_ENV=production webpack --config webpack/prod.config.js --progress --display-error-details --color",
+    "start": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
