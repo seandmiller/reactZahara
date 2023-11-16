@@ -151,7 +151,7 @@
 @media (max-device-width: 600px) {
     .frontpage-title div {
         font-size: 0.4em;
-        font-weight: 500;
+        font-weight: 800;
     }
    /* html > body > #root >  .App > .frontpage-container > div {
         overflow: hidden;
