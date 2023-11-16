@@ -23,3 +23,38 @@
     width:20%;
     margin:auto;
 }
+
+.signin-links-wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+}
+.signin-links-wrapper A {
+    margin:2%;
+}
+
+
+
+
+@media (max-device-width: 600px) {
+    .signin-wrapper button {
+        display: flex;
+        justify-content: center;
+        width:50%;
+        margin:auto;
+    }
+
+    .signin-wrapper {
+        height: 100%;
+    }
+    .signin-wrapper form {
+   
+        width: 90%;
+        padding:10px;
+        padding-bottom: 30px;
+        display: flex;
+        flex-flow: column wrap;
+        height: 90%;
+
+   
+    }
+}

@@ -102,9 +102,10 @@ const SignIn = () => {
             <button onClick={sessionStorage.getItem('name') ?  navigate('/client') : null} > Sign In </button>
 
             </form>
-
+         <div className="signin-links-wrapper">
             <Link to='/'>Need an account?</Link>
             <Link to='/client'> client</Link>
+            </div>
         </section>
                 )}  </> )
 }
