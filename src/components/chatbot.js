@@ -1,8 +1,7 @@
 
-import React, { useContext, useEffect, useState} from "react";
+import React, { useState} from "react";
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { Link } from "react-router-dom";
-import { GlobalContext } from "../context/GlobalContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandHoldingMedical } from '@fortawesome/free-solid-svg-icons';
 import {

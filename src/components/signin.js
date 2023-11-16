@@ -1,6 +1,6 @@
 import React, {useRef, useState, useEffect, useContext} from "react";
 import { Link} from 'react-router-dom';
-import AuthContext from "../context/GlobalContext";
+
 import {GlobalContext } from '../context/GlobalContext';
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const SignIn = () => {
-    const {setAuth, auth, setUserObj,setClientContext} =  useContext(GlobalContext)
+    const {setAuth, setUserObj,setClientContext} =  useContext(GlobalContext)
     const userRef = useRef();
     const errRef = useRef();
     const [user, setUser] = useState('');
@@ -42,7 +42,8 @@ const SignIn = () => {
   }}).then((response) =>  {
    const res = response.json()
     return res
-      }).then(result => {  
+      }).then(result => { 
+        setSuccess(true);
         setUserObj(result.userData);  
         setAuth(result.accessToken); 
         sessionStorage.setItem("symptoms", result.userData.symptoms);

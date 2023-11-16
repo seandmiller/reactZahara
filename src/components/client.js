@@ -15,7 +15,7 @@ const Client = () => {
               'Manipulation']);
     const [clientSymptoms,setClientSymptoms] = useState([]);
     
-    const {clientContext, setClientContext,auth,setAuth, setUserObj,userObj} = useContext(GlobalContext);
+    const {clientContext, setClientContext} = useContext(GlobalContext);
   
     const sessionSymptoms = sessionStorage.getItem('symptoms');
     const userName = sessionStorage.getItem('name');
