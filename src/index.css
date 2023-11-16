@@ -1,5 +1,5 @@
 @import 'styles/frontpage.css';
-@import 'app.css';
+@import '/app.css';
 @import 'styles/chatbot.css';
 @import 'styles/client.css';
 @import 'styles/signin.css';
