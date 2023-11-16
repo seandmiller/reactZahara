@@ -2,6 +2,7 @@
 @import 'app.css';
 @import 'styles/chatbot.css';
 @import 'styles/client.css';
+@import 'styles/signin.css';
 
 html > body > #root > div{
   min-height: 100vh;
@@ -31,4 +32,17 @@ button {
 }
 button:focus {
   outline:0;
+}
+
+
+@media (max-device-width: 600px) {
+
+  html {
+    overflow:auto;
+    
+  }
+  html > body > #root > div{
+    min-height: none;
+  
+  }
 }

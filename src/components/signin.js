@@ -1,22 +1,28 @@
 import React, {useRef, useState, useEffect, useContext} from "react";
 import { Link} from 'react-router-dom';
 import AuthContext from "../context/GlobalContext";
+import {GlobalContext } from '../context/GlobalContext';
+import { useNavigate } from "react-router-dom";
+
 
 
 
 const SignIn = () => {
-    const {setAuth} =  useContext(AuthContext)
+    const {setAuth, auth, setUserObj,setClientContext} =  useContext(GlobalContext)
     const userRef = useRef();
     const errRef = useRef();
     const [user, setUser] = useState('');
     const [pwd, setPwd]  = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
+    const navigate = useNavigate();
 
 
 
      useEffect(() => {
          userRef.current.focus();}, [])
+
+        
     
     useEffect(() => {
         setErrMsg('');
@@ -25,8 +31,34 @@ const SignIn = () => {
     e.preventDefault();
     setUser('');
     setPwd('');
+    fetch("http://localhost:8080/api/login", {
+  method: "POST",
+  body: JSON.stringify({
+    name: user,
+    password: pwd,
+  }),
+  headers: {
+    "Content-type": "application/json; charset=UTF-8"
+  }}).then((response) =>  {
+   const res = response.json()
+    return res
+      }).then(result => {  
+        setUserObj(result.userData);  
+        setAuth(result.accessToken); 
+        sessionStorage.setItem("symptoms", result.userData.symptoms);
+         sessionStorage.setItem('name', result.userData.name);
+         sessionStorage.setItem('auth', result.accessToken)    
+         setClientContext(result.userData.symptoms);
+    }).catch((err) => {
+        console.log(err)
+    })
+   
 
-    setSuccess(true);
+    
+
+
+
+   
   }
    
 
@@ -40,7 +72,7 @@ const SignIn = () => {
 
               </section> ) : (
 
-        <section>
+        <section className="signin-wrapper">
             <p ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'} aria-live='assertive'>
                 {errMsg}</p>
                 <h1>Sign In</h1>
@@ -61,16 +93,17 @@ const SignIn = () => {
             <input
             type='password'
             id='password'
-            ref={userRef}
+      
             onChange={(e) => setPwd(e.target.value)}
             value={pwd}
             required
             />
-            <button>Sign In </button>
+            <button onClick={sessionStorage.getItem('name') ?  navigate('/client') : null} > Sign In </button>
 
             </form>
 
             <Link to='/'>Need an account?</Link>
+            <Link to='/client'> client</Link>
         </section>
                 )}  </> )
 }

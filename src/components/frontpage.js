@@ -2,6 +2,7 @@
 import {useRef,useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHandHoldingMedical} from '@fortawesome/free-solid-svg-icons';
 
 
 const USERregex = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}/;
@@ -36,8 +37,7 @@ const Frontpage = () =>  {
         useEffect(() => {userRef.current.focus()}, []);
         useEffect(() => {
             const result = PWDregex.test(pwd);
-            console.log(result);
-            console.log(pwd);
+         
             setValidPwd(result);
             const match = pwd === matchPwd;
             setValidMatch(match);
@@ -67,6 +67,17 @@ const Frontpage = () =>  {
         setErrMsg('Invalid Entry');
         return
     }
+    fetch("http://localhost:8080/api/post", {
+  method: "POST",
+  body: JSON.stringify({
+    name: user,
+    password: pwd,
+   
+  }),
+  headers: {
+    "Content-type": "application/json; charset=UTF-8"
+  }
+}).then((response) => console.log(response.json()))
     setSuccess(true);
 
  }
@@ -77,16 +88,16 @@ const Frontpage = () =>  {
              <>  {success ? ( <section>
                 <h1>Success!</h1>
                 <p>
-                <Link to='/chatbot'>Sign In</Link>
+                <Link to='/signin'>Sign In</Link>
                 </p>
              </section> ) 
                 
                 : ( <div className='frontpage-container'> 
                  <div className='frontpage-title'> 
                     
-                    <h1>Zahara <FontAwesomeIcon icon='robot' /> </h1>
+                    <h1>Zahara <FontAwesomeIcon icon={faHandHoldingMedical}/> </h1>
                   <div className='t1'> <p className='type1'>Hi my name is Zahara an interactive ChatBot. </p> </div>
-                      <div className='t2'> <p className='type2'> Im here to help you navigate your Psychological Traumas and help you get a better sense of yourself.</p> </div>
+                      <div className='t2'> <p className='type2'> Im here to help you get a better sense of yourself.</p> </div>
                     <div className='t3'>   <p className='type3'> We will do this through the lense of Psycho-Analytical Theory.</p> </div>
                  </div>
             <section className='register-wrapper'>

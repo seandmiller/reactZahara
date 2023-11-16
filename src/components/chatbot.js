@@ -1,9 +1,10 @@
 
-import React, { useContext, useState} from "react";
+import React, { useContext, useEffect, useState} from "react";
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { Link } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHandHoldingMedical } from '@fortawesome/free-solid-svg-icons';
 import {
   MainContainer,
   ChatContainer,
@@ -16,25 +17,21 @@ require('dotenv').config();
 
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-console.log(process.env.REACT_APP_API_KEY)
-console.log(process.env.REACT_APP_API_KEY, API_KEY)
+
 const ChatBot = () => {
-   
+     
+    const userName = sessionStorage.getItem('name') ? sessionStorage.getItem('name') : 'Guest'
     const [messages, setMessages] = useState([
         {
           message: "Hello, I'm Zahara! Ask me anything!",
           sentTime: "just now",
-          sender: "Zar",
+          sender: "Zahara",
         },
       ]);
-      const {clientContext} = useContext(GlobalContext);
+      const mySymptoms =  sessionStorage.getItem('symptoms') ? sessionStorage.getItem('symptoms').split(',') : []
+   
 
-      let mySymptoms = ''
-      for (let i = 0; i < clientContext.length; i++) {
-        mySymptoms = mySymptoms + " " +  clientContext[i];
-      }
-
-     const contextObj = { 'client': `My name is Aseani Miller my symptoms are ${mySymptoms}, this information should help you suggest better responses to my personal need, no need for greetings you've already met me `,
+     const contextObj = { 'client': `My name is ${userName} my symptoms are ${mySymptoms}, this information should help you suggest better responses to my personal need, no need for greetings you've already met me `,
                            'goal': 'Your main goal is to unravel my unconcious mind, we will due this through the lens of Psycho-Analytical theory by Sigmund Freud, you will also study Carl Jung Psycho-analysis findings,',
                             'donot':''  }
 
@@ -104,7 +101,7 @@ const ChatBot = () => {
 
     return (
       <div className="chatpage" >
-        <div className="ai-name-wrapper"> <p>Zahara <FontAwesomeIcon icon='robot' /></p>  </div>
+        <div className="ai-name-wrapper"> <p>Zahara <FontAwesomeIcon icon={faHandHoldingMedical} /></p>  </div>
        
         <div className="chatbot">
         
@@ -118,7 +115,7 @@ const ChatBot = () => {
                 
               >
                 {messages.map((message, i) => {
-                  console.log(message)
+                 
                   return <Message key={i} model={message} />
                 })}
               </MessageList>

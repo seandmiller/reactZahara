@@ -144,3 +144,87 @@
     
     opacity: 20%;
 }
+
+
+@media (max-device-width: 600px) {
+    .symptom-text-wrapper {
+      display: grid;
+   grid-template-columns: 1fr;
+   text-align: center;
+   
+    }
+    .symptom-wrapper div {
+        height: 5%;
+        font-size: 0.7em;
+        opacity: 20%;
+    }
+   
+   
+    .symptom-text-wrapper  p {
+      
+        font-size: 0.5em;
+        padding: 5%;
+        font-weight: 100;
+        text-align: center;
+         
+        
+    }
+  .symptoms-to-be-added {
+    display: grid;
+    grid-template-columns: 1fr;
+    font-size: 0.1em;
+  }
+
+
+ 
+    .client-symptoms {
+        display: grid;
+        grid-template-columns: 1fr;
+        height: 20%;
+        margin-top: 1%;
+        gap: 2%;
+        font-size: 0.2em;
+        font-weight: 100;
+       
+    }
+
+    .client-symptom-wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.3fr 1fr 1fr;
+        gap:0px;
+    }
+   .client-symptom-wrapper p {
+    font-size: 0.8em;
+    font-weight: 100;
+
+   }
+
+
+    .symptom-wrapper button {
+        width: 100%;
+        height: 99%;
+        font-size:0.4em ;
+        transition: ease-in-out 0.5s;
+        border: 0px;
+        color: rgb(255, 53, 255);
+        background-color: whitesmoke;
+        font-weight: 100;
+        
+    }
+    .chatbot-client  {
+        min-height: 100%;
+         width: 100%;
+         font-size: 0.9em;
+         transition: ease-in-out 1s;
+        
+         margin: 0px;
+        display: flex;
+        justify-content: center;
+        font-weight: 900;
+         
+     }
+
+
+    
+}

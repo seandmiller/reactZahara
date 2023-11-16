@@ -6,7 +6,8 @@ import {
     faCircleXmark,
     faSave,
     faMedkit,
-    faNotesMedical
+    faNotesMedical,
+    faHandHoldingMedical
     
     
 
@@ -16,6 +17,6 @@ import {library} from "@fortawesome/fontawesome-svg-core";
 
 
 const Icons = () => {
-return library.add(faCogs,faCircleCheck,faMedkit,faNotesMedical, faSave, faCircleXmark,faUser,faRobot); }
+return library.add(faCogs,faCircleCheck,faHandHoldingMedical,faMedkit,faNotesMedical, faSave, faCircleXmark,faUser,faRobot); }
 
 export default Icons;

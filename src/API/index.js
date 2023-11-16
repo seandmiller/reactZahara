@@ -1,11 +1,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
+const cors = require('cors')
 const routes = require('./routes/routes');
 const app = express();
 
 
+var corsOptions = {
+    origin: ["http://localhost:3000"],
+    optionsSuccessStatus: 200 // For legacy browser support
+    }
 
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use('/api', routes);
 
