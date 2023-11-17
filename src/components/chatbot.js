@@ -13,7 +13,7 @@ import {
   TypingIndicator,
 } from '@chatscope/chat-ui-kit-react';
 require('dotenv').config();
-import APP_API_KEY from "../apikey";
+import APP_API_KEY from "../apikey.js";
 
 
 const API_KEY = APP_API_KEY;
