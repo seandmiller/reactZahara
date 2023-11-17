@@ -13,9 +13,10 @@ import {
   TypingIndicator,
 } from '@chatscope/chat-ui-kit-react';
 require('dotenv').config();
+import APP_API_KEY from "../apikey";
 
 
-const API_KEY = process.env.REACT_APP_API_KEY;
+const API_KEY = APP_API_KEY;
 console.log(API_KEY)
 
 const ChatBot = () => {
