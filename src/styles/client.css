@@ -153,6 +153,10 @@
    text-align: center;
    
     }
+
+    .symptom-wrapper {
+        font-weight: 800;
+    }
     .symptom-wrapper div {
         height: 5%;
         font-size: 0.7em;
