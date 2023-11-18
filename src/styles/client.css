@@ -147,6 +147,7 @@
 
 
 @media (max-device-width: 600px) {
+ 
     .symptom-text-wrapper {
       display: grid;
    grid-template-columns: 1fr;

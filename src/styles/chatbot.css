@@ -68,7 +68,8 @@
 
 @media (max-device-width: 600px) {
     .text-box {
-        height: 480px;
+        margin:auto;
+        height: 75vh;
         width: 100%;
     }
 

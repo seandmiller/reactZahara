@@ -28,13 +28,10 @@ const Frontpage = () =>  {
    
 
 
-
-
-
    
   
 
-        useEffect(() => {userRef.current.focus()}, []);
+        useEffect(() => {userRef.current.focus(); }, []);
         useEffect(() => {
             const result = PWDregex.test(pwd);
          
