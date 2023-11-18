@@ -33,7 +33,7 @@ const ChatBot = () => {
    
 
      const contextObj = { 'client': `My name is ${userName} my symptoms are ${mySymptoms}, this information should help you suggest better responses to my personal need, no need for greetings you've already met me `,
-                           'goal': 'Your main goal is to unravel my unconcious mind, we will due this through the lens of Psycho-Analytical theory by Sigmund Freud, you will also study Carl Jung Psycho-analysis findings,',
+                           'goal': 'Your main goal is to unravel my unconcious mind, we will do this through the lens of Psycho-Analytical theory by Sigmund Freud, you will also study Carl Jung Psycho-analysis findings,',
                             'donot':''  }
 
 
@@ -111,8 +111,8 @@ const ChatBot = () => {
           <MainContainer >
             <ChatContainer className="message-list">       
               <MessageList 
-                scrollBehavior="smooth" 
-                typingIndicator={isTyping ? <TypingIndicator content="Zar is typing" /> : null}
+               
+                typingIndicator={isTyping ? <TypingIndicator content="Zahara is typing" /> : null}
                 
               >
                 {messages.map((message, i) => {
@@ -120,7 +120,7 @@ const ChatBot = () => {
                   return <Message key={i} model={message} />
                 })}
               </MessageList>
-              <MessageInput placeholder="Send a Message" onSend={handleSendRequest} />        
+              <MessageInput placeholder="Send a Message" onSend={handleSendRequest} attachButton={false}/>        
             </ChatContainer >
           </MainContainer>
         </div>
