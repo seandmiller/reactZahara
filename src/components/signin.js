@@ -68,12 +68,7 @@ const SignIn = () => {
 
 
     return (
-  <>   {success ? (<section>
-           
-                 <h1>Log in was sucessful!!!</h1>
-
-
-              </section> ) : (
+  <>  
 
         <section className="signin-wrapper">
             <p ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'} aria-live='assertive'>
@@ -109,7 +104,7 @@ const SignIn = () => {
             <Link to='/client'> client</Link>
             </div>
         </section>
-                )}  </> )
+               </> )
 }
 
 export default SignIn;
