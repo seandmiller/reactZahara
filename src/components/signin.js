@@ -14,7 +14,7 @@ const SignIn = () => {
     const [user, setUser] = useState('');
     const [pwd, setPwd]  = useState('');
     const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
+    const [success, setSuccess] = useState(true);
     const navigate = useNavigate();
 
 
@@ -28,6 +28,7 @@ const SignIn = () => {
         setErrMsg('');
     },[user,pwd])
   const handelSubmit = async (e) => {
+    var successful = true;
     e.preventDefault();
     setUser('');
     setPwd('');
@@ -41,20 +42,30 @@ const SignIn = () => {
     "Content-type": "application/json; charset=UTF-8"
   }}).then((response) =>  {
    const res = response.json()
+  
+     if (response.status == 400) {
+        setErrMsg('Bad Credentials');
+        successful = false
+        
+     }
     return res
       }).then(result => { 
+       
+        if (successful) { 
         setSuccess(true);
+        console.log(success)
         setUserObj(result.userData);  
         setAuth(result.accessToken); 
          sessionStorage.setItem("symptoms", result.userData.symptoms);
          sessionStorage.setItem('name', result.userData.name);
          sessionStorage.setItem('auth', result.accessToken);    
          setClientContext(result.userData.symptoms);
-         navigate('/client');
+         navigate('/client');}
+
     }).catch((err) => {
         setErrMsg(err);
         console.log(err)
-    })
+    }).catch((err) => console.log(err));
    
 
     
