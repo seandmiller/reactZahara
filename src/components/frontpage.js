@@ -64,7 +64,7 @@ const Frontpage = () =>  {
         setErrMsg('Invalid Entry');
         return
     }
-    fetch("https://quiet-lowlands-62573-2c3c77d42eb8.herokuapp.com/api/post", {
+    fetch("https://quiet-lowlands-62573-2c3c77d42eb8.herokuapp.com/api/signup", {
   method: "POST",
   body: JSON.stringify({
     name: user,

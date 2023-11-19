@@ -66,7 +66,7 @@ const handleSave = () => {
      
     if (sessionStorage.getItem('auth')) {
        
-        fetch(`http://localhost:8080/api/update/${userName}`, {
+        fetch(`https://quiet-lowlands-62573-2c3c77d42eb8.herokuapp.com/api/update/${userName}`, {
             method:"PATCH",
             body: JSON.stringify({
                 symptoms:[...clientContext,...clientSymptoms]  

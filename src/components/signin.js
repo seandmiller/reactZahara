@@ -31,7 +31,7 @@ const SignIn = () => {
     e.preventDefault();
     setUser('');
     setPwd('');
-    fetch("http://localhost:8080/api/login", {
+    fetch("https://quiet-lowlands-62573-2c3c77d42eb8.herokuapp.com/api/login", {
   method: "POST",
   body: JSON.stringify({
     name: user,
