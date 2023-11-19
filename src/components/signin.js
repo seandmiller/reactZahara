@@ -48,8 +48,9 @@ const SignIn = () => {
         setAuth(result.accessToken); 
         sessionStorage.setItem("symptoms", result.userData.symptoms);
          sessionStorage.setItem('name', result.userData.name);
-         sessionStorage.setItem('auth', result.accessToken)    
+         sessionStorage.setItem('auth', result.accessToken);    
          setClientContext(result.userData.symptoms);
+         navigate('/client');
     }).catch((err) => {
         console.log(err)
     })
@@ -99,7 +100,7 @@ const SignIn = () => {
             value={pwd}
             required
             />
-            <button onClick={sessionStorage.getItem('name') ?  navigate('/client') : null} > Sign In </button>
+            <button> Sign In </button>
 
             </form>
          <div className="signin-links-wrapper">
