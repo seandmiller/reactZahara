@@ -17,20 +17,22 @@ const Client = () => {
     
     const {clientContext, setClientContext} = useContext(GlobalContext);
   
-    const sessionSymptoms = sessionStorage.getItem('symptoms');
+    const sessionSymptoms = sessionStorage.getItem('symptoms').split(',');
     const userName = sessionStorage.getItem('name');
     useEffect(() => {
         if (!sessionSymptoms) { return; }
         
-        setClientContext(sessionSymptoms.split(','));
+        setClientContext(sessionSymptoms);
     }, []);
 
 
     const symptomsDisplay = symptoms.map(symptom => {    if (!clientSymptoms.includes(symptom) && !clientContext.includes(symptom) ) {
         return (
-      <button onClick={() =>  {
+      <button onClick={() =>  { {clientSymptoms.length + clientContext.length >= 10 ? console.log('') :
         
-        setClientSymptoms([...clientSymptoms, symptom])}}>
+        setClientSymptoms([...clientSymptoms, symptom])} }}>
+       
+       
         {symptom}
    
    
