@@ -100,7 +100,7 @@ const clientContextSymptomsDisplay = clientContext.map(symptom => { return (
             <p >
            I want you to take a moment of self reflection. You will need to have a conversation with yourself, look through all these words and select the ones that you feel
            most align with you. Be 100% honest if the word makes you feel uncomfortable and you feel a little resistance towards it that means you are on the 
-           right path.
+           right path. Select 10
             </p>
      </div>
         
@@ -108,9 +108,11 @@ const clientContextSymptomsDisplay = clientContext.map(symptom => { return (
         
       
            <div className='symptom-wrapper'>
-
-       {symptomsDisplay}
-
+         {clientContext.length >= 10 ? null : 
+          
+          symptomsDisplay
+             
+             }
            </div>
 
            <div className='client-symptom-wrapper'>  <p>Your Symptoms</p> <div className='client-symptoms'>    {clientContext.length > 0 ? clientContextSymptomsDisplay  :  clientSymptomsDisplay } </div>
