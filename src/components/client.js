@@ -22,13 +22,13 @@ const Client = () => {
     useEffect(() => {
         if (!sessionSymptoms) { return; }
         
-        setClientContext(sessionSymptoms).split(',');
+        setClientContext(sessionSymptoms.split(','));
     }, []);
 
 
     const symptomsDisplay = symptoms.map(symptom => {    if (!clientSymptoms.includes(symptom) && !clientContext.includes(symptom) ) {
         return (
-      <button onClick={() =>  { {clientSymptoms.length + clientContext.length >= 10 ? console.log('') :
+      <button onClick={() =>  { {clientSymptoms.length + clientContext.length >= 10 || clientSymptoms.length >= 10 ? console.log('') :
         
         setClientSymptoms([...clientSymptoms, symptom])} }}>
        

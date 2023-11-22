@@ -132,12 +132,13 @@
 }
 
 .symptoms-to-be-added {
+    margin-top: 5%;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     color: grey;
-
+    gap:3%;
     font-size: small;
-    float: right;
+ 
 }
 
 .symptom-wrapper div {
@@ -179,6 +180,7 @@
     display: grid;
     grid-template-columns: 1fr;
     font-size: 0.1em;
+    margin-top: 0%;
   }
 
 
