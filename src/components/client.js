@@ -17,12 +17,12 @@ const Client = () => {
     
     const {clientContext, setClientContext} = useContext(GlobalContext);
   
-    const sessionSymptoms = sessionStorage.getItem('symptoms').split(',');
+    const sessionSymptoms = sessionStorage.getItem('symptoms');
     const userName = sessionStorage.getItem('name');
     useEffect(() => {
         if (!sessionSymptoms) { return; }
         
-        setClientContext(sessionSymptoms);
+        setClientContext(sessionSymptoms).split(',');
     }, []);
 
 
