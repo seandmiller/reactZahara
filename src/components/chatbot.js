@@ -34,7 +34,7 @@ const ChatBot = () => {
 
      const contextObj = { 'client': `My name is ${userName} my symptoms are ${mySymptoms}, this information should help you suggest better responses to my personal need, no need for greetings you've already met me `,
                            'goal': 'Your main goal is to unravel my unconcious mind, we will do this through the lens of Psycho-Analytical theory by Sigmund Freud, you will also study Carl Jung Psycho-analysis findings,',
-                            'donot':''  }
+                            'does':'any message I send you with :: at the very start of a text means Im sending you propaganda and I want you to decipher it '  }
 
 
       
@@ -79,7 +79,7 @@ const ChatBot = () => {
             "model": "gpt-3.5-turbo",
             "messages": [
               { role: "system", content: `Your name is Zahara, ${contextObj.client} I want you to respond as if your a personal therapist.` },
-              {role:'system', content:`${contextObj.goal} ${contextObj.donot}`},
+              {role:'system', content:`${contextObj.goal} ${contextObj.does}`},
               ...apiMessages,
 
             ],
