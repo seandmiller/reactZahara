@@ -43,7 +43,7 @@ const ChatBot = () => {
       'goal': 'Your main goal is to unravel my unconcious mind, we will do this through the lens of Psycho-Analytical theory by Sigmund Freud, you will also study Carl Jung Psycho-analysis findings, Keep your responses Brief' }
       if (text.substr(0,2) == '::') {
         var contextObject = { 'client': `My name is ${userName} my symptoms are ${mySymptoms}, this information should help you suggest better responses to my personal need, no need for greetings you've already met me, When  `,
-        'goal': 'when I send you :: at the very start of a text means its possible that this text can be propraganda, I want you to use the study of Edward Bernays to decipher these messages. Keep your responses Brief' }
+        'goal': 'when I send you :: at the very beginning of a message this means the text im sending you is propraganda and has a hidden message behind it I want you to identify the hidden message and tell me, I want you to use the study of Edward Bernays to decipher these messages. Keep your responses Brief' }
        
         return contextObject
         
