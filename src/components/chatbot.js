@@ -32,14 +32,26 @@ const ChatBot = () => {
       const mySymptoms =  sessionStorage.getItem('symptoms') ? sessionStorage.getItem('symptoms').split(',') : []
    
 
-     const contextObj = { 'client': `My name is ${userName} my symptoms are ${mySymptoms}, this information should help you suggest better responses to my personal need, no need for greetings you've already met me `,
-                           'goal': 'Your main goal is to unravel my unconcious mind, we will do this through the lens of Psycho-Analytical theory by Sigmund Freud, you will also study Carl Jung Psycho-analysis findings,',
-                            'does':'when I send you :: at the very start of a text means Im sending you propaganda and I want you to explain the hidden meaning and psychology behind it, I want you to use the study of Edward Bernays to decipher these messages instead of using Sigmund Freud or Carl Jung.'  }
 
 
       
     const [isTyping, setIsTyping] = useState(false);
- 
+   
+    const context = (text) => {
+
+      var contextObject = { 'client': `My name is ${userName} my symptoms are ${mySymptoms}, this information should help you suggest better responses to my personal need, no need for greetings you've already met me, When I ask you quotes I want them directly from you. `,
+      'goal': 'Your main goal is to unravel my unconcious mind, we will do this through the lens of Psycho-Analytical theory by Sigmund Freud, you will also study Carl Jung Psycho-analysis findings, Keep your responses Brief' }
+      if (text.substr(0,2) == '::') {
+        var contextObject = { 'client': `My name is ${userName} my symptoms are ${mySymptoms}, this information should help you suggest better responses to my personal need, no need for greetings you've already met me, When  `,
+        'goal': 'when I send you :: at the very start of a text means its possible that this text can be propraganda, I want you to use the study of Edward Bernays to decipher these messages. Keep your responses Brief' }
+       
+        return contextObject
+        
+      }
+     
+      return contextObject
+
+    }
   
     const  handleSendRequest = async (message) => {
         const newMessage = {
@@ -50,10 +62,10 @@ const ChatBot = () => {
 
           setMessages((messages) => [...messages, newMessage]);
           setIsTyping(true);
-    
-
+     
+     var contextObj = context(message);     
      try {
-        const response = await processMessageToChatGPT([...messages, newMessage]);
+        const response = await processMessageToChatGPT([...messages, newMessage], contextObj);
         const content = response.choices[0]?.message?.content;
         if (content) {
           const chatGPTResponse = {
@@ -69,7 +81,7 @@ const ChatBot = () => {
          setIsTyping(false);
      };   }
 
-     async function processMessageToChatGPT(chatMessages) {
+     async function processMessageToChatGPT(chatMessages, contextObj) {
         const apiMessages = chatMessages.map((messageObject) => {
             const role = messageObject.sender === "Zahara" ? "assistant" : "user";
             return { role, content: messageObject.message };
@@ -79,7 +91,7 @@ const ChatBot = () => {
             "model": "gpt-3.5-turbo",
             "messages": [
               { role: "system", content: `Your name is Zahara, ${contextObj.client} I want you to respond as if your a personal therapist.` },
-              {role:'system', content:`${contextObj.goal} ${contextObj.does}`},
+              {role:'system', content:`${contextObj.goal}`},
               ...apiMessages,
 
             ],
