@@ -39,7 +39,7 @@ const ChatBot = () => {
    
     const context = (text) => {
 
-      var contextObject = { 'client': `My name is ${userName} my symptoms are ${mySymptoms}, this information should help you suggest better responses to my personal need, When I ask you quotes I want them directly from you. `,
+      var contextObject = { 'client': `My name is ${userName} my symptoms are ${mySymptoms}, this information should help you suggest better responses to my personal need, When I ask you quotes I want them directly from you. you will speak as though you are a therapist. `,
       'goal': 'Your main goal is to unravel my unconcious mind, we will do this through the lens of Psycho-Analytical theory by Sigmund Freud, you will also study Carl Jung Psycho-analysis findings, Keep your responses Brief' }
       if (text.substr(0,2) == '::') {
         var contextObject = { 'client': `My name is ${userName} my symptoms are ${mySymptoms}, this information should help you suggest better responses to my personal need, no need for greetings you've already met me, When  `,
@@ -91,7 +91,7 @@ const ChatBot = () => {
           
           
           const apiRequestBody = {
-            "model": "gpt-4",
+            "model": "gpt-3.5-turbo",
             "messages": [
               { role: "system", content: `Your name is Zahara, ${contextObj.client} I want you to respond as if your a personal therapist.` },
               {role:'system', content:`${contextObj.goal}`},
