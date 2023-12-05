@@ -39,7 +39,7 @@ const ChatBot = () => {
    
     const context = (text) => {
 
-      var contextObject = { 'client': `My name is ${userName} my symptoms are ${mySymptoms}, this information should help you suggest better responses to my personal need, no need for greetings you've already met me, When I ask you quotes I want them directly from you. `,
+      var contextObject = { 'client': `My name is ${userName} my symptoms are ${mySymptoms}, this information should help you suggest better responses to my personal need, When I ask you quotes I want them directly from you. `,
       'goal': 'Your main goal is to unravel my unconcious mind, we will do this through the lens of Psycho-Analytical theory by Sigmund Freud, you will also study Carl Jung Psycho-analysis findings, Keep your responses Brief' }
       if (text.substr(0,2) == '::') {
         var contextObject = { 'client': `My name is ${userName} my symptoms are ${mySymptoms}, this information should help you suggest better responses to my personal need, no need for greetings you've already met me, When  `,
@@ -59,7 +59,8 @@ const ChatBot = () => {
             direction: 'outgoing',
             sender: "user",
           };
-
+          
+       
           setMessages((messages) => [...messages, newMessage]);
           setIsTyping(true);
      
@@ -70,7 +71,7 @@ const ChatBot = () => {
         if (content) {
           const chatGPTResponse = {
             message: content,
-            sender: "ChatGPT",
+            sender: "Zahara",
           };
           setMessages((prevMessages) => [...prevMessages, chatGPTResponse]);}
 
@@ -82,17 +83,19 @@ const ChatBot = () => {
      };   }
 
      async function processMessageToChatGPT(chatMessages, contextObj) {
-        const apiMessages = chatMessages.map((messageObject) => {
+        
+        const clientMessages = chatMessages.map((messageObject) => {
             const role = messageObject.sender === "Zahara" ? "assistant" : "user";
             return { role, content: messageObject.message };
           });
-
+          
+          
           const apiRequestBody = {
-            "model": "gpt-3.5-turbo",
+            "model": "gpt-4",
             "messages": [
               { role: "system", content: `Your name is Zahara, ${contextObj.client} I want you to respond as if your a personal therapist.` },
               {role:'system', content:`${contextObj.goal}`},
-              ...apiMessages,
+              ...clientMessages,
 
             ],
           };
@@ -106,7 +109,7 @@ const ChatBot = () => {
             },
             body: JSON.stringify(apiRequestBody),
           });
-      
+          // where we will ping route to update the data 
           return response.json();
 
 
