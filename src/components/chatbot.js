@@ -40,10 +40,15 @@ const ChatBot = () => {
     const context = (text) => {
 
       var contextObject = { 'client': `My name is ${userName} my symptoms are ${mySymptoms}, this information should help you suggest better responses to my personal need, When I ask you quotes I want them directly from you. you will speak as though you are a therapist. `,
-      'goal': 'Your main goal is to unravel my unconcious mind, we will do this through the lens of Psycho-Analytical theory by Sigmund Freud, you will also study Carl Jung Psycho-analysis findings, Keep your responses Brief' }
+      'goal': 'Your main goal is to unravel my unconcious mind, we will do this through the lens of Psycho-Analytical theory by Sigmund Freud, you will also study Carl Jung Psycho-analysis findings, Keep your responses Brief',
+    'model':'gpt-3.5-turbo',
+     'society':'We live in a hypersexualized society that values lust, greed and status over genuine connections, We have turned connections between two human beings into a commodity' }
+      
       if (text.substr(0,2) == '::') {
         var contextObject = { 'client': `My name is ${userName} my symptoms are ${mySymptoms}, this information should help you suggest better responses to my personal need, no need for greetings you've already met me, When  `,
-        'goal': 'when I send you :: at the very beginning of a message this means the text im sending you is propraganda and has a hidden message behind it I want you to identify the hidden message and tell me, I want you to use the study of Edward Bernays to decipher these messages. Keep your responses Brief' }
+        'goal': 'when I send you :: at the very beginning of a message this means the text im sending you is propraganda and has a hidden message behind it I want you to identify the hidden message and tell me, I want you to use the study of Edward Bernays to decipher these messages. Keep your responses Brief',
+         'model':'gpt-4',
+         'society':'We live in a hypersexualized society that values lust, greed and status over genuine connections, We have turned connections between two human beings into a commodity' }
        
         return contextObject
         
@@ -91,10 +96,11 @@ const ChatBot = () => {
           
           
           const apiRequestBody = {
-            "model": "gpt-3.5-turbo",
+            "model": contextObj.model,
             "messages": [
               { role: "system", content: `Your name is Zahara, ${contextObj.client} I want you to respond as if your a personal therapist.` },
               {role:'system', content:`${contextObj.goal}`},
+              {role:'system', content:`${contextObj.society}`},
               ...clientMessages,
 
             ],
