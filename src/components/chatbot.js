@@ -45,13 +45,14 @@ const ChatBot = () => {
      'society':'We live in a hypersexualized society that values lust, greed and status over genuine connections, We have turned connections between two human beings into a commodity' }
       
       if (text.substr(0,2) == '::') {
-        var contextObject = { 'client': `My name is ${userName} my symptoms are ${mySymptoms}, this information should help you suggest better responses to my personal need, no need for greetings you've already met me, When  `,
-        'goal': 'when I send you :: at the very beginning of a message this means the text im sending you is propraganda and has a hidden message behind it I want you to identify the hidden message and tell me, I want you to use the study of Edward Bernays to decipher these messages. Keep your responses Brief',
-         'model':'gpt-4',
-         'society':'We live in a hypersexualized society that values lust, greed and status over genuine connections, We have turned connections between two human beings into a commodity' }
+        contextObject.goal = 'when I send you :: at the very beginning of a message this means the text im sending you is propraganda and has a hidden message behind it I want you to identify the hidden message and tell me, I want you to use the study of Edward Bernays to decipher these messages. Keep your responses Brief';
+        contextObject.model = 'gpt-4';
+        return contextObject}
+      if (text.substr(0,1) == ':') {
+        contextObject.goal = 'There is a hidden psychological meaning behind this text, this person is not saying what they really mean I want you to respond based on what I really mean'
+        contextObject.model = 'gpt-4';
        
         return contextObject
-        
       }
      
       return contextObject
