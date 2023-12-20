@@ -53,12 +53,13 @@ const SignIn = () => {
        
         if (successful) { 
         setSuccess(true);
-        console.log(success)
+        
         setUserObj(result.userData);  
         setAuth(result.accessToken); 
          sessionStorage.setItem("symptoms", result.userData.symptoms);
          sessionStorage.setItem('name', result.userData.name);
-         sessionStorage.setItem('auth', result.accessToken);    
+         sessionStorage.setItem('auth', result.accessToken);
+         setAuth(result.accessToken)
          setClientContext(result.userData.symptoms);
          navigate('/client');}
 

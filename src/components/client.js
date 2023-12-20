@@ -73,11 +73,13 @@ const handleSave = () => {
             body: JSON.stringify({
                 symptoms:[...clientContext,...clientSymptoms]  
               }),
+              withCredentials:true,
           headers: {"Content-type": "application/json; charset=UTF-8",
-            Authorization: `Bearer ${sessionStorage.getItem('auth')}`}
+            Authorization: `Bearer ${sessionStorage.getItem('auth')}`
+           }
     })
        .then(resp => resp.json())
-       .then(json => console.log(json.symptoms)) 
+       .then(json => console.log('')) 
        .catch(err => {console.log(err)}) } 
   setClientSymptoms([]);     
 }

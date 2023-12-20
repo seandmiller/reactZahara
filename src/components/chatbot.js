@@ -1,9 +1,10 @@
 
-import React, { useState} from "react";
+import React, {useEffect, useState} from "react";
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandHoldingMedical } from '@fortawesome/free-solid-svg-icons';
+import axios from "axios";
 import {
   MainContainer,
   ChatContainer,
@@ -20,8 +21,35 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 
 
 const ChatBot = () => {
-     
-    const userName = sessionStorage.getItem('name') ? sessionStorage.getItem('name') : 'Guest'
+  const userName = sessionStorage.getItem('name') ? sessionStorage.getItem('name') : 'Guest';
+    
+  const auth = sessionStorage.getItem('auth')
+  const [apiMessages, setApiMessages] = useState([]);
+  
+
+  useEffect(() => { 
+  if (auth)  {
+    const url = `https://quiet-lowlands-62573-2c3c77d42eb8.herokuapp.com/api/messages`;
+    // axios.patch(url, {headers: {Authorization: `Bearer ${auth}`}})
+  const reqHeaders = {'Authorization': `Bearer ${auth}`,
+    "Content-type": "application/json; charset=UTF-8"
+  }
+ 
+  fetch(url, {
+    headers:reqHeaders,
+    method:'POST',
+    body: JSON.stringify({
+        name:userName,
+        encrypt:false
+      })
+   
+ 
+    }).then(res => res.json()).then(result => { setApiMessages(result)}).catch(err => console.log(err))}
+    
+  }, []);
+   
+
+
     const [messages, setMessages] = useState([
         {
           message: "Hello, I'm Zahara! Ask me anything!",
@@ -32,10 +60,10 @@ const ChatBot = () => {
       const mySymptoms =  sessionStorage.getItem('symptoms') ? sessionStorage.getItem('symptoms').split(',') : []
    
 
-
-
       
     const [isTyping, setIsTyping] = useState(false);
+
+    
    
     const context = (text) => {
 
@@ -43,7 +71,8 @@ const ChatBot = () => {
       'goal': 'Your main goal is to unravel my unconcious mind, we will do this through the lens of Psycho-Analytical theory by Sigmund Freud, you will also study Carl Jung Psycho-analysis findings, Keep your responses Brief',
     'model':'gpt-3.5-turbo',
      'society':'We live in a hypersexualized society that values lust, greed and status over genuine connections, We have turned connections between two human beings into a commodity' }
-      
+   
+
       if (text.substr(0,2) == '::') {
         contextObject.goal = 'when I send you :: at the very beginning of a message this means the text im sending you is propraganda and has a hidden message behind it I want you to identify the hidden message and tell me, I want you to use the study of Edward Bernays to decipher these messages. Keep your responses Brief';
         contextObject.model = 'gpt-4';
@@ -72,8 +101,14 @@ const ChatBot = () => {
      
      var contextObj = context(message);     
      try {
-        const response = await processMessageToChatGPT([...messages, newMessage], contextObj);
-        const content = response.choices[0]?.message?.content;
+        const content = await processMessageToChatGPT([...messages, newMessage], contextObj);
+        // const content = response.choices[0]?.message?.content;
+        
+        
+        
+        
+        
+        
         if (content) {
           const chatGPTResponse = {
             message: content,
@@ -89,12 +124,18 @@ const ChatBot = () => {
      };   }
 
      async function processMessageToChatGPT(chatMessages, contextObj) {
+       
         
         const clientMessages = chatMessages.map((messageObject) => {
             const role = messageObject.sender === "Zahara" ? "assistant" : "user";
             return { role, content: messageObject.message };
           });
           
+          console.log(...apiMessages,...clientMessages)
+        setApiMessages([...apiMessages, ...clientMessages]);
+        
+          
+          const aiMessageHistory = apiMessages.slice(Math.max(apiMessages.length - 5, 0));
           
           const apiRequestBody = {
             "model": contextObj.model,
@@ -102,7 +143,8 @@ const ChatBot = () => {
               { role: "system", content: `Your name is Zahara, ${contextObj.client} I want you to respond as if your a personal therapist.` },
               {role:'system', content:`${contextObj.goal}`},
               {role:'system', content:`${contextObj.society}`},
-              ...clientMessages,
+              {role:'system', content: sessionStorage.getItem('auth') ? '' : 'I am an amazing person'},
+              ...aiMessageHistory, ...clientMessages
 
             ],
           };
@@ -113,11 +155,34 @@ const ChatBot = () => {
             headers: {
               "Authorization": "Bearer " + API_KEY,
               "Content-Type": "application/json",
+              
             },
             body: JSON.stringify(apiRequestBody),
           });
-          // where we will ping route to update the data 
-          return response.json();
+         
+   
+          var result = await response.json();
+
+         
+          var content = result.choices[0]?.message?.content;
+         
+       
+       
+          if (auth) {
+            const reqHeaders = {'Authorization': `Bearer ${auth}`,
+            "Content-type": "application/json; charset=UTF-8"
+          }
+          fetch(`https://quiet-lowlands-62573-2c3c77d42eb8.herokuapp.com/api/messages`, {
+            headers:reqHeaders,
+            method:'POST',
+            body: JSON.stringify({
+                name:userName,
+                messages:[...apiMessages, ...clientMessages,  {"role": "assistant", "content": content}],
+                encrypt:true
+              })
+    }).then(res => console.log(res)).catch(err => console.log(err)) }
+
+          return content;
 
 
      }
