@@ -26,30 +26,23 @@ const ChatBot = () => {
   const auth = sessionStorage.getItem('auth')
   const [apiMessages, setApiMessages] = useState([]);
   
-
-  useEffect(() => { 
+ 
+  useEffect(() => {
+  
   if (auth)  {
+    document.cookie=`access_token=[${auth}]`
     const url = `https://quiet-lowlands-62573-2c3c77d42eb8.herokuapp.com/api/messages`;
     // axios.patch(url, {headers: {Authorization: `Bearer ${auth}`}})
-  const reqHeaders = {'Authorization': `Bearer ${auth}`,
-    "Content-type": "application/json; charset=UTF-8"
-  }
+  const reqHeaders = {"Authorization":"Bearer " + auth, "Content-type":"application/json"}
  
-  fetch(url, {
-    headers:reqHeaders,
-    method:'POST',
-    body: JSON.stringify({
-        name:userName,
-        encrypt:false
-      })
+  fetch(url,
+    {headers:reqHeaders,
+      method:"POST",
+    body:JSON.stringify({
+      name:userName,
+      encrypt:false}),
+      }).then(res => res.json()).then(result => {setApiMessages(result)}).catch(err => console.log(err))}}, []);
    
- 
-    }).then(res => res.json()).then(result => { setApiMessages(result)}).catch(err => console.log(err))}
-    
-  }, []);
-   
-
-
     const [messages, setMessages] = useState([
         {
           message: "Hello, I'm Zahara! Ask me anything!",
@@ -58,12 +51,9 @@ const ChatBot = () => {
         },
       ]);
       const mySymptoms =  sessionStorage.getItem('symptoms') ? sessionStorage.getItem('symptoms').split(',') : []
-   
-
-      
+  
     const [isTyping, setIsTyping] = useState(false);
 
-    
    
     const context = (text) => {
 
@@ -130,12 +120,12 @@ const ChatBot = () => {
             const role = messageObject.sender === "Zahara" ? "assistant" : "user";
             return { role, content: messageObject.message };
           });
-          
-          console.log(...apiMessages,...clientMessages)
+          console.log(apiMessages)
+          console.log([...apiMessages],[...clientMessages])
         setApiMessages([...apiMessages, ...clientMessages]);
         
           
-          const aiMessageHistory = apiMessages.slice(Math.max(apiMessages.length - 5, 0));
+          const aiMessageHistory = apiMessages.slice(Math.max(apiMessages.length - 10, 0));
           
           const apiRequestBody = {
             "model": contextObj.model,
@@ -155,7 +145,6 @@ const ChatBot = () => {
             headers: {
               "Authorization": "Bearer " + API_KEY,
               "Content-Type": "application/json",
-              
             },
             body: JSON.stringify(apiRequestBody),
           });
@@ -171,7 +160,7 @@ const ChatBot = () => {
           if (auth) {
             const reqHeaders = {'Authorization': `Bearer ${auth}`,
             "Content-type": "application/json; charset=UTF-8"
-          }
+}
           fetch(`https://quiet-lowlands-62573-2c3c77d42eb8.herokuapp.com/api/messages`, {
             headers:reqHeaders,
             method:'POST',

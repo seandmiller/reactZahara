@@ -69,7 +69,7 @@ const handleSave = () => {
     if (sessionStorage.getItem('auth')) {
        
         fetch(`https://quiet-lowlands-62573-2c3c77d42eb8.herokuapp.com/api/update/${userName}`, {
-            method:"PATCH",
+            method:"POST",
             body: JSON.stringify({
                 symptoms:[...clientContext,...clientSymptoms]  
               }),
